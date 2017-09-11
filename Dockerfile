@@ -72,6 +72,11 @@ apk add --no-cache \
 
 # compile minetestserver
  git clone --depth 1 https://github.com/minetest/minetest.git /tmp/minetest && \
+ pushd /tmp/minetest && \
+ git fetch --tags && \
+ latestTag=$(git describe --tags `git rev-list --tags --max-count=1`) && \
+ git checkout $latestTag && \
+ popd && \
  cp /tmp/minetest//minetest.conf.example /defaults/minetest.conf && \
  cd /tmp/minetest && \
  cmake . \
