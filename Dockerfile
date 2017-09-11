@@ -72,11 +72,10 @@ apk add --no-cache \
 
 # compile minetestserver
  git clone https://github.com/minetest/minetest.git /tmp/minetest && \
- pushd /tmp/minetest && \
+ cd /tmp/minetest && \
  git fetch --tags && \
  latestTag=$(git describe --tags `git rev-list --tags --max-count=1`) && \
  git checkout $latestTag && \
- popd && \
  cp /tmp/minetest//minetest.conf.example /defaults/minetest.conf && \
  cd /tmp/minetest && \
  cmake . \
@@ -103,11 +102,10 @@ apk add --no-cache \
 
 # fetch additional game from git
  git clone https://github.com/minetest/minetest_game.git /defaults/games/minetest && \
- pushd /defaults/games/minetest && \
+ cd /defaults/games/minetest && \
  git fetch --tags && \
  latestGameTag=$(git describe --tags `git rev-list --tags --max-count=1`) && \
  git checkout $latestGameTag && \
- popd && \
 
 # cleanup
  apk del --purge \
