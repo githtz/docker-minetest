@@ -71,7 +71,7 @@ apk add --no-cache \
  make install && \
 
 # compile minetestserver
- git clone --depth 1 https://github.com/minetest/minetest.git /tmp/minetest && \
+ git clone https://github.com/minetest/minetest.git /tmp/minetest && \
  pushd /tmp/minetest && \
  git fetch --tags && \
  latestTag=$(git describe --tags `git rev-list --tags --max-count=1`) && \
@@ -102,7 +102,12 @@ apk add --no-cache \
  cp -pr  /usr/share/minetest/games/* /defaults/games/ && \
 
 # fetch additional game from git
- git clone --depth 1 https://github.com/minetest/minetest_game.git /defaults/games/minetest && \
+ git clone https://github.com/minetest/minetest_game.git /defaults/games/minetest && \
+ pushd /defaults/games/minetest && \
+ git fetch --tags && \
+ latestGameTag=$(git describe --tags `git rev-list --tags --max-count=1`) && \
+ git checkout $latestGameTag && \
+ popd && \
 
 # cleanup
  apk del --purge \
